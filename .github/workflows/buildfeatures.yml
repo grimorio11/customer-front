@@ -25,18 +25,15 @@ jobs:
     - name: Install npm packages
       run: |
         echo "installing npm packages"
-        npm cache clean --force
-  #      npm install --force
-  #      npm install -g @angular/cli@latest
-
+  
     - name: Install angular cli
       run: npm install -g @angular/cli@latest 
 
-    # - name: run test and build angular app
-    #   run: | 
-    #     ng test --watch=false
-    #     ng build
-    #     echo "running test and build angular app"
+    - name: run test and build angular app
+      run: | 
+        ng test --watch=false
+        ng build
+        echo "running test and build angular app"
 
     # - name: copy build to customer-back/src/main/resources/static
     #   run: |
