@@ -25,7 +25,7 @@ jobs:
     - name: Install npm packages
       run: |
         echo "installing npm packages"
-  #      npm cache clean --force
+        npm cache clean --force
   #      npm install --force
   #      npm install -g @angular/cli@latest
 
