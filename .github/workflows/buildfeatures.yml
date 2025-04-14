@@ -36,10 +36,10 @@ jobs:
         ng build
         echo "running test and build angular app"
 
-    - name: copy build to customer-back/src/main/resources/static
-      run: |
-        echo "copying build to customer-back/src/main/resources/static"
-        cp -r dist/customer-front/* ../customer-back/src/main/resources/static/
+    # - name: copy build to customer-back/src/main/resources/static
+    #   run: |
+    #     echo "copying build to customer-back/src/main/resources/static"
+    #     cp -r dist/customer-front/* ../customer-back/src/main/resources/static/
     
 
 
