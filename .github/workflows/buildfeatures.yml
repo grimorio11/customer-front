@@ -30,7 +30,7 @@ jobs:
   #      npm install -g @angular/cli@latest
 
     - name: Install angular cli
-      run: npm install -g angular-cli@latest 
+      run: npm install --force -g angular-cli@latest 
 
     # - name: run test and build angular app
     #   run: | 
