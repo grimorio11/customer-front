@@ -25,7 +25,8 @@ jobs:
     - name: Install npm packages
       run: |
         echo "installing npm packages"
-  
+        npm install
+        
     - name: Install angular cli
       run: npm install -g @angular/cli@latest 
 
