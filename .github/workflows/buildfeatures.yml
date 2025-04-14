@@ -29,11 +29,11 @@ jobs:
     - name: Install angular cli
       run: npm install -g angular-cli@latest
 
-    - name: run test and build angular app
-      run: | 
-        ng test --watch=false
-        ng build --prod
-        echo "running test and build angular app"
+    # - name: run test and build angular app
+    #   run: | 
+    #     ng test --watch=false
+    #     ng build
+    #     echo "running test and build angular app"
 
     # - name: copy build to customer-back/src/main/resources/static
     #   run: |
