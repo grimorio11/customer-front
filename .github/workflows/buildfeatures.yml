@@ -4,37 +4,62 @@
 name: Build features and test feature branch
 
 on:
-  push:
-    branches: [ "features/*" ]
+  pull_request:
+    branches: [ development ]
+    types: [ opened, reopened ]
 
 jobs:
   build:
-    runs-on: windows-latest #ubuntu-latest  #self-hosted
+    runs-on: ubuntu-latest  #self-hosted
     steps:
     - uses: actions/checkout@v4
+      with:
+        ref: ${{ github.event.pull_request.head.ref }}
+
     - name: Pull and checkout from git repository
       run: |
         echo "pulling and checking out from git repository"
-    
-    - name: Use Node.js 18
-      uses: actions/setup-node@v3
+
+    - name: Set up JDK 17
+      uses: actions/setup-java@v4
       with:
-        node-version: 18
-        cache: 'npm'
-    
-    - name: Install npm packages
+        java-version: '17'
+        distribution: 'temurin'
+        cache: 'maven'
+
+    - name: Cache maven dependencies
+      uses: actions/cache@v4
+      with: 
+        path: ~/.m2/repository
+        key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+        restore-keys: |
+          ${{ runner.os }}-maven-
+          
+    - name: build with maven
       run: |
-        echo "installing npm packages"
-        npm install
+        echo "building with maven"
+        mvn clean install
+          
+    
+    # - name: Use Node.js 18
+    #   uses: actions/setup-node@v3
+    #   with:
+    #     node-version: 18
+    #     cache: 'npm'
+    
+    # - name: Install npm packages
+    #   run: |
+    #     echo "installing npm packages"
+    #     npm install
 
-    - name: Install angular cli
-      run: npm install -g @angular/cli@latest 
+    # - name: Install angular cli
+    #   run: npm install -g @angular/cli@latest 
 
-    - name: run test and build angular app
-      run: | 
-        ng test --watch=false
-        ng build
-        echo "running test and build angular app"
+    # - name: run test and build angular app
+    #   run: | 
+    #     ng test --watch=false
+    #     ng build
+    #     echo "running test and build angular app"
 
     # - name: copy build to customer-back/src/main/resources/static
     #   run: |
